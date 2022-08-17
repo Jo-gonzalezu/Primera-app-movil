@@ -1,0 +1,7 @@
+{
+  "name": "app-primeraapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
