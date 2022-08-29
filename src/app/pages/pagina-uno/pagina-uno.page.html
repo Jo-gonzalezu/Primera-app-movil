@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button></ion-back-button>
+      <ion-title>Iniciar Sesión</ion-title>
+      <div style="float: right;">
+        <ion-icon name="people-circle-outline" style="padding: 20px; font-size: x-large; right: auto;"></ion-icon>
+      </div>
+      <ion-progress-bar color="tertiary" type="indeterminate" mode="ios"></ion-progress-bar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="ion-text-center">
+    <ion-label position="stacked" class="ion-text-center">Correo electrónico</ion-label>
+    <ion-input type="email" required="true" [(ngmodel)]="mdl_user"></ion-input>
+  </ion-item>
+  <ion-item class="ion-text-center">
+    <ion-label position="stacked">Contraseña</ion-label>
+    <ion-input type="password" required="true" [(ngmodel)]="mdl_pass"></ion-input>
+  </ion-item>
+  <br>
+  <div style="display: flex; justify-content: center;">
+    <ion-button shape="round" fill="outline" (click)="validarCredenciales()" color="tertiary">Entrar</ion-button>
+  </div>  
+</ion-content>
