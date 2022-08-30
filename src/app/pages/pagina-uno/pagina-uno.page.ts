@@ -46,7 +46,7 @@ export class PaginaUnoPage implements OnInit {
           placeholder: 'Nueva contraseña',
           name: 'nuevapass',
           id:'nuevapass',
-          type: 'text', 
+          type: 'password', 
         }
       ],
       buttons: [{
