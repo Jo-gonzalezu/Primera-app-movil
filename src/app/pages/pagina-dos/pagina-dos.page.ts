@@ -11,5 +11,5 @@ export class PaginaDosPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
 }
