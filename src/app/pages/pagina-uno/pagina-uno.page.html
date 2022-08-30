@@ -12,14 +12,14 @@
 <ion-content>
   <ion-item class="ion-text-center">
     <ion-label position="stacked" class="ion-text-center">Correo electrónico</ion-label>
-    <ion-input type="email" required="true" [(ngmodel)]="mdl_user"></ion-input>
+    <ion-input type="email" required="true" [(ngModel)]="mdl_user"></ion-input>
   </ion-item>
   <ion-item class="ion-text-center">
     <ion-label position="stacked">Contraseña</ion-label>
-    <ion-input type="password" required="true" [(ngmodel)]="mdl_pass"></ion-input>
+    <ion-input type="password" required="true" [(ngModel)]="mdl_pass"></ion-input>
   </ion-item>
   <br>
   <div style="display: flex; justify-content: center;">
-    <ion-button shape="round" fill="outline" (click)="validarCredenciales()" color="tertiary">Entrar</ion-button>
+    <ion-button shape="round" fill="outline" (click)="ingresar()" color="tertiary">Entrar</ion-button>
   </div>  
 </ion-content>
