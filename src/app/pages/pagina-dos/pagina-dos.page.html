@@ -1,12 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>pagina-dos</ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">Floating Label</ion-label>
-    <ion-input type="password" [(ngModel)]="mdl_pass" required></ion-input>
-  </ion-item>
+  <div>
+    <img class="imagebanner" src="https://images7.alphacoders.com/103/1033664.jpg">
+    <h2 class="texto">¡Bienvenido {{ mdl_user }}!</h2>
+      <ion-avatar>
+        <img src="https://img2.freepng.es/20180616/sxr/kisspng-avatar-computer-icons-avatar-icon-5b254abb7cf344.7556131215291706195118.jpg" style="position: absolute; z-index: 2; max-width: 35px; max-height: 35px; vertical-align: middle; top: 30px; left: 45px;">
+        <h1></h1>
+      </ion-avatar>
+  </div>
+  <div class="ion-text-center">
+    <img class="imageqr" src="https://img.freepik.com/vector-premium/escanear-icono-plano-codigo-qr-telefono-codigo-barras-mano-sostiene-telefono-inteligente-ilustracion-vectorial_545793-435.jpg">
+  </div>
+
+  <ion-list>
+    <ion-list-header>Sitios de la corporación Duoc</ion-list-header>
+    <ion-item> 
+      <ion-thumbnail slot="end">
+        <img src="https://play-lh.googleusercontent.com/dWTf0pgRKejB6YvcCM1OdVZU0bIVwU44uNPWmKHAkj-pyj_5fSVQqYqvfdHyzrcTXpux" />
+      </ion-thumbnail>
+      <ion-label>Acceso a Vivo Duoc</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="end">
+        <img src="https://i.ytimg.com/vi/bvL5SXckV7w/maxresdefault.jpg" />
+      </ion-thumbnail>
+      <ion-label>Acceso a Ava Blackboard</ion-label>
+    </ion-item>
+  </ion-list>  
 </ion-content>

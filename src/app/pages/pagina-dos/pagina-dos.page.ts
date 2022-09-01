@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-dos',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaDosPage implements OnInit {
 
-  constructor() { }
+  mdl_user: string = '';
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    try {
+      this.mdl_user = this.router.getCurrentNavigation().extras.state.usuario;
+    } catch (error) {
+      this.router.navigate(['pagina-uno']);
+    }
   }
   
 }
