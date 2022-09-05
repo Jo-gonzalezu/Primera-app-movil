@@ -106,7 +106,7 @@ export class PaginaUnoPage implements OnInit {
   async mostrarToast(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 5000
+      duration: 3000
     });
     toast.present();
   }

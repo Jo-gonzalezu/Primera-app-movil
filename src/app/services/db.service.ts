@@ -20,7 +20,7 @@ export class DbService {
   }
 
   validarCredenciales(user, pass, new_pass) {
-    if(user == 'admin' && pass == new_pass ) {
+    if(user == 'estudiante' && pass == new_pass ) {
       this.validador = true;
       this.router.navigate(['pagina-dos']);
       return true;

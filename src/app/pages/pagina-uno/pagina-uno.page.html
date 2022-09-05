@@ -9,18 +9,19 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item class="ion-text-center" required>
-    <ion-label position="stacked" class="ion-text-center">Correo electrónico</ion-label>
-    <ion-input type="email" [(ngModel)]="mdl_user" required></ion-input>
-  </ion-item>
-  <ion-item class="ion-text-center">
-    <ion-label position="stacked">Contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="mdl_pass" required></ion-input>
-  </ion-item>
-  <br>
-  <div style="display: flex; justify-content: center;">
-    <ion-button shape="round" fill="outline" class="animado" (click)="ingresar()" color="tertiary">Entrar</ion-button>
-    <ion-button shape="round" fill="outline" class="animado2" (click)="cambioPass()" color="tertiary">Cambiar Contraseña</ion-button>  
-  </div>
+<ion-content >
+
+      <ion-item class="ion-text-center" required>
+        <ion-label position="stacked" class="ion-text-center">Correo electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="mdl_user" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-text-center">
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="mdl_pass" required></ion-input>
+      </ion-item>
+      <br>
+      <div style="display: flex; justify-content: center;">
+        <ion-button shape="round" fill="outline" class="animado" (click)="ingresar()" color="tertiary">Entrar</ion-button>
+        <ion-button shape="round" fill="outline" class="animado2" (click)="cambioPass()" color="tertiary">Cambiar Contraseña</ion-button>  
+      </div>
 </ion-content>
