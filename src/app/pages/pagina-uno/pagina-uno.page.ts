@@ -17,7 +17,8 @@ export class PaginaUnoPage implements OnInit {
               private alertController: AlertController,
               private router: Router,
               private db: DbService,
-              private animationCtrl: AnimationController) { }
+              private animationCtrl: AnimationController,
+              ) { }
 
   ngOnInit() {
     const squareA = this.animationCtrl.create()
