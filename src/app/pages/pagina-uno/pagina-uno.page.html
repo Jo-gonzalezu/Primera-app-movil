@@ -1,20 +1,16 @@
 <ion-header>
   <ion-toolbar class="ion-padding">
-      <ion-title class="ion-text-center">Iniciar Sesión</ion-title>
-      <div style="float: right;">
-        <ion-icon name="people-circle-outline" style="padding: 20px; font-size: x-large; right: auto;"></ion-icon>
-      </div>
+      <ion-title class="ion-text-center" style="padding-top: 8%;">Iniciar Sesión</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content >
-
+<ion-content>
       <ion-item class="ion-text-center" required>
-        <ion-label position="stacked" class="ion-text-center">CorreASDASDo electrónico</ion-label>
+        <ion-label position="stacked" style="padding-left: 34%;">Correo electrónico</ion-label>
         <ion-input type="email" [(ngModel)]="mdl_user" required></ion-input>
       </ion-item>
       <ion-item class="ion-text-center">
-        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-label position="stacked" style="padding-left: 33%;">Contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="mdl_pass" required></ion-input>
       </ion-item>
       <br>
@@ -22,4 +18,33 @@
         <ion-button shape="round" fill="outline" class="animado" (click)="ingresar()" color="tertiary">Entrar</ion-button>
         <ion-button shape="round" fill="outline" class="animado2" (click)="cambioPass()" color="tertiary">Cambiar Contraseña</ion-button>  
       </div>
+      <ion-button shape="round" fill="outline" class="animado" id="open-modal" expand="block" color="tertiary">Registrarse</ion-button>
+      <p>{{ message }}</p>
+      <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="atras()" shape="round" fill="outline" class="animado2" color="tertiary">Atras</ion-button>
+              </ion-buttons>
+              <ion-title class="ion-text-center">Registro</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="registrarUsuario()" shape="round" fill="outline" class="animado2" color="tertiary">Listo</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <ion-item>
+              <ion-label position="stacked" style="padding-left: 58%;">Correo</ion-label>
+              <ion-input type="text" placeholder="Ejemplo1234@gmail.com" [(ngModel)]="mdl_user"></ion-input>
+              <ion-label position="stacked" style="padding-left: 58%;">Nombre</ion-label>
+              <ion-input type="text" placeholder="Kenny" [(ngModel)]="mdl_nombre"></ion-input>
+              <ion-label position="stacked" style="padding-left: 58%;">Apellido</ion-label>
+              <ion-input type="text" placeholder="González" [(ngModel)]="mdl_apellido"></ion-input>
+              <ion-label position="stacked" style="padding-left: 55%;">Contraseña</ion-label>
+              <ion-input type="password" placeholder="**************" [(ngModel)]="mdl_pass" required></ion-input>
+            </ion-item>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
 </ion-content>

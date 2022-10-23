@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { AlertController, AnimationController, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController, IonModal, ToastController } from '@ionic/angular';
 import { DbService } from 'src/app/services/db.service';
+
 
 @Component({
   selector: 'app-pagina-uno',
@@ -9,6 +10,7 @@ import { DbService } from 'src/app/services/db.service';
   styleUrls: ['./pagina-uno.page.scss'],
 })
 export class PaginaUnoPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
 
   mdl_user: string = '';
   mdl_pass: string = '';
@@ -19,7 +21,7 @@ export class PaginaUnoPage implements OnInit {
               private alertController: AlertController,
               private router: Router,
               private db: DbService,
-              private animationCtrl: AnimationController,
+              private animationCtrl: AnimationController
               ) { }
 
   ngOnInit() {
@@ -122,9 +124,13 @@ export class PaginaUnoPage implements OnInit {
 
     await alert.present();
   }
-  
+
   registrarUsuario(){
     this.db.almacenarPersona(this.mdl_user, this.mdl_nomb, this.mdl_apell, this.mdl_pass);
       console.log('Usuario creado exitosamente.');
+  }
+
+  atras(){
+    this.modal.dismiss(null, 'cancel');
   }
 }
