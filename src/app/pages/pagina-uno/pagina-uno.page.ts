@@ -13,6 +13,8 @@ export class PaginaUnoPage implements OnInit {
   mdl_user: string = '';
   mdl_pass: string = '';
   md1_verifi: string ='verifica';
+  mdl_nomb: string = '';
+  mdl_apell: string = ''; 
   constructor(private toastController: ToastController,
               private alertController: AlertController,
               private router: Router,
@@ -119,5 +121,10 @@ export class PaginaUnoPage implements OnInit {
     });
 
     await alert.present();
+  }
+  
+  registrarUsuario(){
+    this.db.almacenarPersona(this.mdl_user, this.mdl_nomb, this.mdl_apell, this.mdl_pass);
+      console.log('Usuario creado exitosamente.');
   }
 }

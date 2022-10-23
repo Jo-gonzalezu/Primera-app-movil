@@ -13,21 +13,21 @@ export class DbService {
     this.sqlite.create({
       name: 'datos.db'
     }).then((db: SQLiteObject) => {
-      console.log('BASE DE DATOS OK');
+      console.log('BASE DE DATOS OK'); 
       //SE CREA LA TABLA
-      db.executeSql("CREATE TABLE IF NOT EXISTS PERSONA(RUT VARCHAR(12),"
-      + "NOMBRE VARCHAR(20), APELLIDO VARCHAR(20)," + "SUELDO INTEGER", []).then(() =>{
-        console.log('Tabla Persona Creada Correctamente');
+      db.executeSql("CREATE TABLE IF NOT EXISTS PERSONA(CORREO VARCHAR(30) PRIMARY KEY,"
+      + "NOMBRE VARCHAR(20), APELLIDO VARCHAR(20)," + "CONTRASEÑA VARCHAR(30)", []).then(() =>{
+        console.log('Tabla de usuario creada correctamente');
       })
     })
   }
 
-  almacenarPersona(rut, nombre, apellido, sueldo) {
+  almacenarPersona(correo, nombre, apellido, contraseña) {
     this.sqlite.create({
       name: "datos.db"
     }).then((db: SQLiteObject) => {
-      db.executeSql("INSERT INTO PERSONA VALUES(?,?,?,?)", [rut, nombre, apellido, sueldo]).then(() =>{
-        console.log('Persona almacenada correctamente');
+      db.executeSql("INSERT INTO PERSONA VALUES(?,?,?,?)", [correo, nombre, apellido, contraseña]).then(() =>{
+        console.log('Usuario almacenado correctamente');
       })
     })
   }
@@ -36,7 +36,7 @@ export class DbService {
     return this.sqlite.create({
       name: "datos.db"
     }).then((db: SQLiteObject) => {
-      return db.executeSql("SELECT RUT, NOMBRE, APELLIDO, SUELDO FROM PERSONA", []).then((data) =>{
+      return db.executeSql("SELECT CORREO, NOMBRE, APELLIDO, CONTRASEÑA FROM PERSONA", []).then((data) =>{
         return data;
       })
     })
@@ -47,7 +47,7 @@ export class DbService {
       name: "datos.db",
       iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      return db.executeSql('SELECT RUT, NOMBRE, APELLIDO, SUELDO ' 
+      return db.executeSql('SELECT CORREO, NOMBRE, APELLIDO, CONTRASEÑA ' 
         + ' FROM PERSONA WHERE NOMBRE LIKE ?', [nombre + '%']).then((data) => {
           return data;
         })
@@ -59,9 +59,9 @@ export class DbService {
       name: "datos.db",
       iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      db.executeSql('DELETE FROM PERSONA WHERE RUT = ?', 
+      db.executeSql('DELETE FROM PERSONA WHERE CORREO = ?', 
       [rut]).then(() => {
-          console.log('FSR: Persona eliminada correctamente');
+          console.log('FSR: Usuario eliminado correctamente');
         })
     });
   }
