@@ -17,6 +17,10 @@ export class PaginaUnoPage implements OnInit {
   md1_verifi: string ='verifica';
   mdl_nomb: string = '';
   mdl_apell: string = ''; 
+  mdl_rut: string = '';
+  mdl_nombre: string = '';
+  mdl_apellido: string = '';
+  mdl_sueldo: string = '';
   constructor(private toastController: ToastController,
               private alertController: AlertController,
               private router: Router,
@@ -47,7 +51,7 @@ export class PaginaUnoPage implements OnInit {
 
 
   }
-  act_pass: string = 'admin';
+  act_pass: string = 'a';
 
 
   ingresar() {
@@ -56,7 +60,7 @@ export class PaginaUnoPage implements OnInit {
       this.mostrarMensaje('Credenciales erroneas');
     }
     else{
-      this.mostrarToast('Bienvenido '+this.mdl_user);
+      this.mostrarToast('Sesión iniciada como "'+this.mdl_user+'"');
       let extras: NavigationExtras = {
         state: {
           usuario: this.mdl_user,
@@ -111,7 +115,8 @@ export class PaginaUnoPage implements OnInit {
   async mostrarToast(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 3000
+      duration: 3000,
+      color: 'success'
     });
     toast.present();
   }
@@ -125,9 +130,15 @@ export class PaginaUnoPage implements OnInit {
     await alert.present();
   }
 
-  registrarUsuario(){
-    this.db.almacenarPersona(this.mdl_user, this.mdl_nomb, this.mdl_apell, this.mdl_pass);
-      console.log('Usuario creado exitosamente.');
+  almacenar() {
+    this.db.almacenarPersona(this.mdl_rut, this.mdl_nombre, 
+      this.mdl_apellido, this.mdl_sueldo);
+    console.log('FSR: PERSONA CREADA OK');
+      
+  }
+
+  navegar() {
+    this.router.navigate(['seleccion']);
   }
 
   atras(){

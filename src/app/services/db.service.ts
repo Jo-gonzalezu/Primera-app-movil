@@ -10,36 +10,41 @@ export class DbService {
   validador: boolean = false;
 
   constructor(private router: Router, private sqlite: SQLite) {
+    // SE CREA LA BASE DE DATOS
     this.sqlite.create({
-      name: 'datos.db'
+      name: "datos.db",
+      iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      console.log('BASE DE DATOS OK'); 
-      //SE CREA LA TABLA
-      db.executeSql("CREATE TABLE IF NOT EXISTS PERSONA(CORREO VARCHAR(30) PRIMARY KEY,"
-      + "NOMBRE VARCHAR(20), APELLIDO VARCHAR(20)," + "CONTRASEÑA VARCHAR(30)", []).then(() =>{
-        console.log('Tabla de usuario creada correctamente');
-      })
-    })
+      db.executeSql('CREATE TABLE IF NOT EXISTS PERSONA(RUT VARCHAR(12), ' 
+        + 'NOMBRE VARCHAR(30), APELLIDO VARCHAR(30), ' 
+        + 'SUELDO INTEGER)', []).then(() => {
+          console.log('Base de datos OK');
+        })
+    });
   }
 
-  almacenarPersona(correo, nombre, apellido, contraseña) {
+  almacenarPersona(rut, nombre, apellido, sueldo) {
     this.sqlite.create({
-      name: "datos.db"
+      name: "datos.db",
+      iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      db.executeSql("INSERT INTO PERSONA VALUES(?,?,?,?)", [correo, nombre, apellido, contraseña]).then(() =>{
-        console.log('Usuario almacenado correctamente');
-      })
-    })
+      db.executeSql('INSERT INTO PERSONA VALUES(?, ?, ?, ?)', 
+      [rut, nombre, apellido, sueldo]).then(() => {
+          console.log('Base de datos OK');
+        })
+    });
   }
-  
+
   listarPersonas() {
     return this.sqlite.create({
-      name: "datos.db"
+      name: "datos.db",
+      iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      return db.executeSql("SELECT CORREO, NOMBRE, APELLIDO, CONTRASEÑA FROM PERSONA", []).then((data) =>{
-        return data;
-      })
-    })
+      return db.executeSql('SELECT RUT, NOMBRE, APELLIDO, SUELDO ' 
+        + ' FROM PERSONA', []).then((data) => {
+          return data;
+        })
+    });
   }
 
   buscarPersonas(nombre) {
@@ -47,7 +52,7 @@ export class DbService {
       name: "datos.db",
       iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      return db.executeSql('SELECT CORREO, NOMBRE, APELLIDO, CONTRASEÑA ' 
+      return db.executeSql('SELECT RUT, NOMBRE, APELLIDO, SUELDO ' 
         + ' FROM PERSONA WHERE NOMBRE LIKE ?', [nombre + '%']).then((data) => {
           return data;
         })
@@ -59,9 +64,9 @@ export class DbService {
       name: "datos.db",
       iosDatabaseLocation: "default"
     }).then((db: SQLiteObject) => {
-      db.executeSql('DELETE FROM PERSONA WHERE CORREO = ?', 
+      db.executeSql('DELETE FROM PERSONA WHERE RUT = ?', 
       [rut]).then(() => {
-          console.log('FSR: Usuario eliminado correctamente');
+          console.log('FSR: Persona eliminada correctamente');
         })
     });
   }
@@ -76,7 +81,7 @@ export class DbService {
   }
 
   validarCredenciales(user, pass, new_pass) {
-    if(user == 'estudiante' && pass == new_pass ) {
+    if(user == 'a' && pass == new_pass ) {
       this.validador = true;
       this.router.navigate(['pagina-dos']);
       return true;

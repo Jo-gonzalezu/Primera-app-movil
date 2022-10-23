@@ -12,6 +12,12 @@
       <ion-item class="ion-text-center">
         <ion-label position="stacked" style="padding-left: 33%;">Contraseña</ion-label>
         <ion-input type="password" [(ngModel)]="mdl_pass" required></ion-input>
+        <ion-item>
+          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-label>
+            <ion-icon name="eye-outline" style="width: 25px; height: 25px;"></ion-icon>
+          </ion-label>
+        </ion-item>
       </ion-item>
       <br>
       <div style="display: flex; justify-content: center;">
@@ -19,7 +25,7 @@
         <ion-button shape="round" fill="outline" class="animado2" (click)="cambioPass()" color="tertiary">Cambiar Contraseña</ion-button>  
       </div>
       <ion-button shape="round" fill="outline" class="animado" id="open-modal" expand="block" color="tertiary">Registrarse</ion-button>
-      <p>{{ message }}</p>
+
       <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
         <ng-template>
           <ion-header>
@@ -29,20 +35,26 @@
               </ion-buttons>
               <ion-title class="ion-text-center">Registro</ion-title>
               <ion-buttons slot="end">
-                <ion-button (click)="registrarUsuario()" shape="round" fill="outline" class="animado2" color="tertiary">Listo</ion-button>
+                <ion-button (click)="almacenar()" shape="round" fill="outline" class="animado2" color="tertiary">Listo</ion-button>
               </ion-buttons>
             </ion-toolbar>
           </ion-header>
           <ion-content class="ion-padding">
-            <ion-item>
-              <ion-label position="stacked" style="padding-left: 58%;">Correo</ion-label>
-              <ion-input type="text" placeholder="Ejemplo1234@gmail.com" [(ngModel)]="mdl_user"></ion-input>
-              <ion-label position="stacked" style="padding-left: 58%;">Nombre</ion-label>
-              <ion-input type="text" placeholder="Kenny" [(ngModel)]="mdl_nombre"></ion-input>
-              <ion-label position="stacked" style="padding-left: 58%;">Apellido</ion-label>
-              <ion-input type="text" placeholder="González" [(ngModel)]="mdl_apellido"></ion-input>
-              <ion-label position="stacked" style="padding-left: 55%;">Contraseña</ion-label>
-              <ion-input type="password" placeholder="**************" [(ngModel)]="mdl_pass" required></ion-input>
+            <ion-item class="ion-margin-top inputRedondo" lines="none">
+              <ion-label position="floating">Rut</ion-label>
+              <ion-input [(ngModel)]="mdl_rut"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-top inputRedondo" lines="none">
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input [(ngModel)]="mdl_nombre"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-top inputRedondo" lines="none">
+              <ion-label position="floating">Apellido</ion-label>
+              <ion-input [(ngModel)]="mdl_apellido"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-top inputRedondo" lines="none">
+              <ion-label position="floating">Sueldo</ion-label>
+              <ion-input [(ngModel)]="mdl_sueldo"></ion-input>
             </ion-item>
           </ion-content>
         </ng-template>
