@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController, AnimationController, IonModal, ToastController } from '@ionic/angular';
 import { DbService } from 'src/app/services/db.service';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pagina-uno',
@@ -11,7 +11,14 @@ import { DbService } from 'src/app/services/db.service';
 })
 export class PaginaUnoPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
+  usuario = new FormGroup({
 
+    email: new FormControl('', [Validators.email, Validators.required]),
+    nombre: new FormControl('',[Validators.required, Validators.minLength(4)]),
+    apellido: new FormControl('',[Validators.required, Validators.minLength(4)]),
+    password: new FormControl('',[Validators.required]),
+
+  });
   mdl_user: string = '';
   mdl_pass: string = '';
   md1_verifi: string ='verifica';
@@ -21,6 +28,8 @@ export class PaginaUnoPage implements OnInit {
   mdl_nombre: string = '';
   mdl_apellido: string = '';
   mdl_sueldo: string = '';
+  lista_personas = [];
+  passreult: string ='';
   constructor(private toastController: ToastController,
               private alertController: AlertController,
               private router: Router,
@@ -51,12 +60,10 @@ export class PaginaUnoPage implements OnInit {
 
 
   }
-  act_pass: string = 'a';
 
 
   ingresar() {
-    console.log(this.act_pass)
-    if(!this.db.validarCredenciales(this.mdl_user, this.mdl_pass,this.act_pass)) {
+    if(!this.db.buscaruser(this.mdl_user, this.mdl_pass)) {
       this.mostrarMensaje('Credenciales erroneas');
     }
     else{
@@ -68,48 +75,6 @@ export class PaginaUnoPage implements OnInit {
         }
       }
       this.router.navigate(['pagina-dos'], extras);
-    }
-  }
-
-  async cambioPass() {
-    const alert = await this.alertController.create({
-      header: 'Cambiar contraseña',
-      inputs: [
-        {
-          placeholder: 'Codigo de verificacion',
-          name: 'codigoverifica',
-          id: 'codigoverifica',
-        },
-        {
-          placeholder: 'Nueva contraseña',
-          name: 'nuevapass',
-          id:'nuevapass',
-          type: 'password', 
-        }
-      ],
-      buttons: [{
-        text: 'ok', handler:(res) =>{
-          if(res.codigoverifica == this.md1_verifi){
-            this.act_pass= res.nuevapass,
-            console.log(this.act_pass);
-          }
-          else{
-            this.mostrarToast('Codigo de verificación erroneo.');
-          }
-        }
-      },
-      {
-        text:'Cancelar'
-      }  
-      
-      ],
-    });
-    await alert.present();
-  }
-
-  validarCredenciales(){
-    if (this.mdl_user == "admin" && this.mdl_pass == this.act_pass) {
-      this.router.navigate(['pagina-dos']);
     }
   }
   async mostrarToast(mensaje) {
@@ -130,18 +95,22 @@ export class PaginaUnoPage implements OnInit {
     await alert.present();
   }
 
-  almacenar() {
+  almacenar(res) {
     this.db.almacenarPersona(this.mdl_rut, this.mdl_nombre, 
       this.mdl_apellido, this.mdl_sueldo);
-    console.log('FSR: PERSONA CREADA OK');
+    console.log('FSR: PERSONA CREADA OK')
+    this.modal.dismiss(null, 'cancel');
+
       
   }
 
   navegar() {
     this.router.navigate(['seleccion']);
   }
-
   atras(){
     this.modal.dismiss(null, 'cancel');
+      
+    }
+
+
   }
-}

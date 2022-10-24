@@ -46,6 +46,7 @@ export class PaginaDosPage implements OnInit {
         let persona = data.rows.item(x);
 
         that.lista_personas.push(persona);
+        
       }
     })
   }
