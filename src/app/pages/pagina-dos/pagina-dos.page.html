@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="oscuro">
-    <ion-title>Selección de Personas</ion-title>
+    <ion-title>Busqueda</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/">
 
@@ -9,7 +9,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="magnolia ion-padding">
+<ion-content [fullscreen]="true" class="magnolia ion-padding">
+  <div>
+    <ion-button expand="block" (click)="leerQR()"> Leer QR </ion-button>
+    <ion-label class="titulo"> {{texto}} </ion-label>
+  </div>
   <ion-item class="ion-margin-top inputRedondo" lines="none">
     <ion-label position="floating">Nombre</ion-label>
     <ion-input [(ngModel)]="mdl_nombre"></ion-input>
@@ -31,17 +35,23 @@
       <ion-card-subtitle>{{ p.NOMBRE }} {{ p.APELLIDO }}</ion-card-subtitle>
       <ion-card-title>
         <ion-icon  name="person"></ion-icon>
-        {{ p.RUT }}
+        {{ p.EMAIL }}
       </ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
-      $ {{ p.SUELDO }}
-      <ion-button expand="block" color="danger">
+      <ion-button (click)="eliminar(p.EMAIL)" expand="block" color="danger">
         <ion-icon name="trash-outline"></ion-icon>
         Eliminar
       </ion-button>
     </ion-card-content>
   </ion-card>
-  
+  <ion-list-header>Sitios de la corporación Duoc</ion-list-header>
+    <ion-item> 
+      <ion-thumbnail slot="end">
+        <img src="https://play-lh.googleusercontent.com/dWTf0pgRKejB6YvcCM1OdVZU0bIVwU44uNPWmKHAkj-pyj_5fSVQqYqvfdHyzrcTXpux" />
+        <img src="https://lh3.googleusercontent.com/kgxDz6eaYuH-l4vrHecOLjzGnLXonSdzSr34Q3lKPi9v5gcAtMyPHo8jopVhVqpx0jc" />
+      </ion-thumbnail>
+      <ion-label>Acceso a Vivo Duoc</ion-label>
+    </ion-item>
 </ion-content>

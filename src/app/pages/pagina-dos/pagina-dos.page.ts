@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DbService } from 'src/app/services/db.service';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
 @Component({
   selector: 'app-pagina-dos',
@@ -11,6 +12,7 @@ export class PaginaDosPage implements OnInit {
 
   mdl_nombre: string = '';
   lista_personas = [];
+  texto: string = '';
 
   constructor(private router: Router,
               private db: DbService) { }
@@ -51,8 +53,24 @@ export class PaginaDosPage implements OnInit {
     })
   }
 
-  eliminar(rut) {
-    this.db.eliminarPersona(rut);
+  eliminar(email) {
+    this.db.eliminarPersona(email);
     this.listar();
   }
+
+  async leerQR() {
+    document.querySelector('body').classList.add('scanner-active');
+
+    await BarcodeScanner.checkPermission({ force: true });
+
+    BarcodeScanner.hideBackground();
+
+    const result = await BarcodeScanner.startScan();
+
+    if (result.hasContent) {
+      this.texto = result.content;
+    }
+
+    document.querySelector('body').classList.remove('scanner-active');
+  };
 }

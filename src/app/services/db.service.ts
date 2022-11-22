@@ -99,7 +99,6 @@ export class DbService {
   }
 
   buscaruser(email,mdl_pass) {
-
     return this.sqlite.create({
       name: "datos.db",
       iosDatabaseLocation: "default"

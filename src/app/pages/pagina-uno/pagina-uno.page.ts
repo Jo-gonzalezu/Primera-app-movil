@@ -57,8 +57,6 @@ export class PaginaUnoPage implements OnInit {
       { offset: 0.5, transform: 'scale(1.2)', opacity: '0.3' },
       { offset: 1, transform: 'scale(1)', opacity: '1' }
     ]).play();
-
-
   }
 
 
@@ -67,7 +65,7 @@ export class PaginaUnoPage implements OnInit {
       this.mostrarMensaje('Credenciales erroneas');
     }
     else{
-      this.mostrarToast('Sesión iniciada como "'+this.mdl_user+'"');
+      
       let extras: NavigationExtras = {
         state: {
           usuario: this.mdl_user,
@@ -109,7 +107,6 @@ export class PaginaUnoPage implements OnInit {
   }
   atras(){
     this.modal.dismiss(null, 'cancel');
-      
     }
 
 
