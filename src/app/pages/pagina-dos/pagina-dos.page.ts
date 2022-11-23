@@ -11,6 +11,7 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 export class PaginaDosPage implements OnInit {
 
   mdl_nombre: string = '';
+  mdl_idclase: string = '';
   lista_personas = [];
   texto: string = '';
 
@@ -60,18 +61,19 @@ export class PaginaDosPage implements OnInit {
 
   async leerQR() {
     document.querySelector('body').classList.add('scanner-active');
-
     await BarcodeScanner.checkPermission({ force: true });
-
     BarcodeScanner.hideBackground();
-
     const result = await BarcodeScanner.startScan();
-
     if (result.hasContent) {
-      this.texto = result.content;
+      let string_completo = result.content
+      let simbolo = string_completo.indexOf("|");
+      let conSubstr = string_completo.substr(simbolo, 145);  /* Extracción de carácteres despues del | */
+      this.texto = conSubstr
     }
-
     document.querySelector('body').classList.remove('scanner-active');
   };
+
+
+
 
 }
