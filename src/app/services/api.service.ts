@@ -6,17 +6,17 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
   
-  rutaBase: string = 'https://fer-sepulveda.cl/API_CLASE/api-service.php'
+  rutaBase: string = 'https://fer-sepulveda.cl/API_PRUEBA2/api-service.php'
 
 constructor(private http: HttpClient) { }
 
-PersonaAlmacenar(rut, nombre, apellido, sueldo) {
+registrarAsistencia(CORREO, ID_CLASE) {
   let that = this;
 
   return new Promise(resolve => {
     resolve(that.http.post(that.rutaBase, {
-      nombreFuncion: "PersonaAlmacenar",
-      parametros: [rut, nombre, apellido, sueldo]
+      nombreFuncion: "AsistenciaAlmacenar",
+      parametros: [CORREO, ID_CLASE]
     }).toPromise())
   })
 }
