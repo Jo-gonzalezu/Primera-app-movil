@@ -23,10 +23,9 @@ registrarAsistencia(CORREO, ID_CLASE) {
 
 PersonaListar() {
   let that = this;
-
   return new Promise(resolve => {
     resolve(that.http.get(that.rutaBase 
-      + '?nombreFuncion=PersonaListar').toPromise())
+      + '?nombreFuncion=EliminarAsistencia&correo=').toPromise())
   })
 }
 }
