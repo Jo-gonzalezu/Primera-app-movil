@@ -73,4 +73,5 @@ export class PaginaDosPage implements OnInit {
 
     document.querySelector('body').classList.remove('scanner-active');
   };
+
 }

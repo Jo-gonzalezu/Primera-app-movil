@@ -1,57 +1,19 @@
-<ion-header>
-  <ion-toolbar class="oscuro">
-    <ion-title>Busqueda</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/">
-
-      </ion-back-button>
-    </ion-buttons>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="magnolia ion-padding">
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
   <div>
     <ion-button expand="block" (click)="leerQR()"> Leer QR </ion-button>
     <ion-label class="titulo"> {{texto}} </ion-label>
   </div>
-  <ion-item class="ion-margin-top inputRedondo" lines="none">
-    <ion-label position="floating">Nombre</ion-label>
-    <ion-input [(ngModel)]="mdl_nombre"></ion-input>
-  </ion-item>
-  <ion-button expand="block" class="oscuro ion-margin-top" (click)="buscar()"> Buscar </ion-button>
-
-  <!-- <ion-item *ngFor="let p of lista_personas">
-    <ion-label>{{ p.RUT }}</ion-label>
-    <ion-label>{{ p.NOMBRE}} {{ p.APELLIDO}}</ion-label>
-
-    <ion-button color="danger" (click)="eliminar(p.RUT)">
-      <ion-icon name="trash" slot="icon-only"></ion-icon>
-    </ion-button>
-
-  </ion-item> -->
-
-  <ion-card *ngFor="let p of lista_personas">
-    <ion-card-header>
-      <ion-card-subtitle>{{ p.NOMBRE }} {{ p.APELLIDO }}</ion-card-subtitle>
-      <ion-card-title>
-        <ion-icon  name="person"></ion-icon>
-        {{ p.EMAIL }}
-      </ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      <ion-button (click)="eliminar(p.EMAIL)" expand="block" color="danger">
-        <ion-icon name="trash-outline"></ion-icon>
-        Eliminar
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-  <ion-list-header>Sitios de la corporación Duoc</ion-list-header>
-    <ion-item> 
-      <ion-thumbnail slot="end">
-        <img src="https://play-lh.googleusercontent.com/dWTf0pgRKejB6YvcCM1OdVZU0bIVwU44uNPWmKHAkj-pyj_5fSVQqYqvfdHyzrcTXpux" />
-        <img src="https://lh3.googleusercontent.com/kgxDz6eaYuH-l4vrHecOLjzGnLXonSdzSr34Q3lKPi9v5gcAtMyPHo8jopVhVqpx0jc" />
-      </ion-thumbnail>
-      <ion-label>Acceso a Vivo Duoc</ion-label>
-    </ion-item>
-</ion-content>
