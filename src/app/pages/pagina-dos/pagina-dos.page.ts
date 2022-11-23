@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DbService } from 'src/app/services/db.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { ApiService } from 'src/app/services/api.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pagina-dos',
@@ -16,7 +18,9 @@ export class PaginaDosPage implements OnInit {
   texto: string = '';
 
   constructor(private router: Router,
-              private db: DbService) { }
+              private db: DbService,
+              private toastController: ToastController,
+              private api: ApiService) { }
 
   ngOnInit() {
     try {
@@ -73,7 +77,29 @@ export class PaginaDosPage implements OnInit {
     document.querySelector('body').classList.remove('scanner-active');
   };
 
+  async obtenerAsignatura() {
+    let that = this;
 
+      let data = await that.api.registrarAsistencia(
+        that.mdl_nombre, that.mdl_idclase);
+
+      if (data['result'][0].RESPUESTA === 'OK') {
+        that.mostrarMensaje('Persona Almacenada Correctamente')
+      } else {
+        that.mostrarMensaje('ERR03');
+      }
+    }
+    
+
+  async mostrarMensaje(mensaje) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    await toast.present();
+  }
 
 
 }
