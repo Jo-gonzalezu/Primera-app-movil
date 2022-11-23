@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DbService } from 'src/app/services/db.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { ApiService } from 'src/app/services/api.service';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pagina-dos',
@@ -13,9 +15,14 @@ export class PaginaDosPage implements OnInit {
   mdl_nombre: string = '';
   lista_personas = [];
   texto: string = '';
+  mdl_asignatura: string = '';
+  mdl_idclase: string = '';
 
   constructor(private router: Router,
-              private db: DbService) { }
+              private db: DbService,
+              private api: ApiService,
+              private loadingController: LoadingController,
+              private toastController: ToastController) { }
 
   ngOnInit() {
     try {
@@ -60,18 +67,39 @@ export class PaginaDosPage implements OnInit {
 
   async leerQR() {
     document.querySelector('body').classList.add('scanner-active');
-
     await BarcodeScanner.checkPermission({ force: true });
-
     BarcodeScanner.hideBackground();
-
     const result = await BarcodeScanner.startScan();
-
     if (result.hasContent) {
       this.texto = result.content;
     }
-
     document.querySelector('body').classList.remove('scanner-active');
   };
+
+
+  /*traer el mdl_asignatura y el id_clase previo a esto*/
+  async obtenerAsignatura() {
+    let that = this;
+
+      let data = await that.api.registrarAsistencia(
+        that.mdl_asignatura, that.mdl_idclase);
+
+      if (data['result'][0].RESPUESTA === 'OK') {
+        that.mostrarMensaje('Persona Almacenada Correctamente')
+      } else {
+        that.mostrarMensaje('ERR03');
+      }
+    }
+    
+
+  async mostrarMensaje(mensaje) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    await toast.present();
+  }
 
 }
