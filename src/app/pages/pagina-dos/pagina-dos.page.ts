@@ -71,8 +71,21 @@ export class PaginaDosPage implements OnInit {
     if (result.hasContent) {
       let string_completo = result.content
       let simbolo = string_completo.indexOf("|");
-      let conSubstr = string_completo.substr(simbolo, 145);  /* Extracción de carácteres despues del | */
+      let conSubstr = string_completo.substr(simbolo+1, 145);  /* Extracción de carácteres despues del | */
+      this.mdl_idclase = conSubstr
       this.texto = conSubstr
+      let that = this;
+
+      let data = await that.api.registrarAsistencia(
+        that.mdl_nombre, that.mdl_idclase);
+
+      if (data['result'][0].RESPUESTA === 'OK') {
+        that.mostrarMensaje('Persona Almacenada Correctamente')
+      } else {
+        that.mostrarMensaje('ERR03');
+      }
+
+
     }
     document.querySelector('body').classList.remove('scanner-active');
   };
