@@ -12,10 +12,9 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class PaginaDosPage implements OnInit {
 
-  mdl_nombre: string = '';
+  mdl_user: string = '';
   lista_personas = [];
   texto: string = '';
-  mdl_asignatura: string = '';
   mdl_idclase: string = '';
 
   constructor(private router: Router,
@@ -26,7 +25,7 @@ export class PaginaDosPage implements OnInit {
 
   ngOnInit() {
     try {
-      this.mdl_nombre = this.router.getCurrentNavigation().extras.state.usuario;
+      this.mdl_user = this.router.getCurrentNavigation().extras.state.usuario;
       this.listar();
     } catch (error) {
       this.router.navigate(['pagina-uno']);
@@ -50,7 +49,7 @@ export class PaginaDosPage implements OnInit {
     let that = this;
     this.lista_personas = [];
 
-    this.db.buscarPersonas(this.mdl_nombre).then(data => {
+    this.db.buscarPersonas(this.mdl_user).then(data => {
       for(let x=0; x < data.rows.length; x++) {
         let persona = data.rows.item(x);
 
@@ -71,7 +70,11 @@ export class PaginaDosPage implements OnInit {
     BarcodeScanner.hideBackground();
     const result = await BarcodeScanner.startScan();
     if (result.hasContent) {
-      this.texto = result.content;
+      let string_completo = result.content
+      let simbolo = string_completo.indexOf("|");
+      let conSubstr = string_completo.substr(simbolo, 145);  /* Extracción de carácteres despues del | */
+      this.texto = conSubstr
+
     }
     document.querySelector('body').classList.remove('scanner-active');
   };
@@ -82,7 +85,7 @@ export class PaginaDosPage implements OnInit {
     let that = this;
 
       let data = await that.api.registrarAsistencia(
-        that.mdl_asignatura, that.mdl_idclase);
+        that.mdl_user, that.mdl_idclase);
 
       if (data['result'][0].RESPUESTA === 'OK') {
         that.mostrarMensaje('Persona Almacenada Correctamente')
